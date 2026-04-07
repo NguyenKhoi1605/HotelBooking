@@ -143,11 +143,9 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGODB_URI;
 
 async function startServer() {
-    const connectDB = require("./config/mongodbConnection.js");
-    try {
-        mongodbConnection = await connectDB()
-        console.log(mongodbConnection.connection.readyState)
-        console.log("✅ MongoDB connected");
+  try {
+    await mongoose.connect(MONGO_URI);
+    console.log("✅ MongoDB connected");
 
     const publicUrl =
       process.env.BACKEND_PUBLIC_URL || `http://localhost:${PORT}`;
